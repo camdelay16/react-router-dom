@@ -1,7 +1,10 @@
 // src/App.jsx
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import PokemonList from "./components/PokemonList.jsx";
 import NavBar from "./components/NavBar.jsx";
+import PokemonDetails from "./components/PokemonDetails.jsx";
+import PokemonForm from "./components/PokemonForm.jsx";
 
 const initialState = [
   { _id: 1, name: "bulbasaur", weight: 69, height: 7 },
@@ -17,7 +20,28 @@ const App = () => {
     <>
       <NavBar />
       <h1>Pokemon!</h1>
-      <PokemonList pokemon={pokemon} />
+      <Routes>
+        <Route
+          path="/"
+          element={<h2>Pokemon Home Page!</h2>}
+        />
+        <Route
+          path="/pokemon"
+          element={<PokemonList pokemon={pokemon} />}
+        />
+        <Route
+          path="/pokemon/new"
+          element={<PokemonForm />}
+        />
+        <Route
+          path="/pokemon/:pokemonId"
+          element={<PokemonDetails pokemon={pokemon} />}
+        />
+        <Route
+          path="*"
+          element={<h2>Whoops, nothing there...</h2>}
+        />
+      </Routes>
     </>
   );
 };
